@@ -1,0 +1,100 @@
+body {
+    justify-content: center;
+    margin: 0;
+    background-color: #f4f7f6;
+    font-family: 'Helvetica Neue', sans-serif;
+}
+
+h1 {
+    font-size: 40px;
+    text-align: center;
+    color: #333;
+}
+
+.inputBar {
+    display: flex;
+    justify-content: center;
+    padding: 20px 0;
+}
+
+#searchForm {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    max-width: 600px;
+}
+
+#directoryPickerButton {
+    align-self: flex-end;
+    margin: 0 20px;
+}
+
+input[type=text] {
+    font-size: 18px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+}
+
+button {
+    font-size: 18px;
+    background-color: #1DA1F2;
+    color: white;
+    padding: 10px 20px;
+    margin-left: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #0c85d0;
+}
+
+#imageContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px;
+    width: calc(100% - 40px);
+    margin: 0 auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    transition: box-shadow 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.card:hover {
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+body.dark-mode .card {
+    border-color: #333333;
+    background-color: #1e1e1e;
+}
+
+body.dark-mode button {
+    background-color: #4a76a8;
+} 
