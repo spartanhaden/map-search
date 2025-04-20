@@ -8,27 +8,33 @@ body {
     overflow: hidden;
 }
 
+.headerContainer {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    flex-shrink: 0;
+}
+
 h1 {
     font-size: 30px;
-    text-align: center;
     color: #333;
-    margin-top: 10px;
-    margin-bottom: 5px;
+    margin: 0;
+    margin-right: 20px;
     flex-shrink: 0;
 }
 
 .inputBar {
     display: flex;
-    justify-content: center;
-    padding: 10px 0;
-    flex-shrink: 0;
+    align-items: center;
+    flex-grow: 1;
+    justify-content: flex-end;
+    padding: 0;
 }
 
 #searchForm {
     display: flex;
-    justify-content: center;
     flex-grow: 1;
-    max-width: 500px;
+    margin-right: 8px;
 }
 
 input[type=text] {
@@ -88,9 +94,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
     text-align: center;
     transition: box-shadow 0.3s;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -117,7 +121,6 @@ body.dark-mode h1 {
 }
 
 body.dark-mode .card {
-    border-color: #333333;
     background-color: #1e1e1e;
 }
 
