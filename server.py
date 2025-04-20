@@ -116,6 +116,17 @@ async def serve_frame(frame_id: int):
         raise HTTPException(status_code=500, detail="Internal server error")
 
 
+@app.get("/pointcloud")
+async def serve_point_cloud():
+    """Serves the sparse_map.ply file."""
+    point_cloud_path = "data/sparse_map.ply"
+    if os.path.exists(point_cloud_path):
+        return FileResponse(point_cloud_path, media_type='application/octet-stream', filename='sparse_map.ply')
+    else:
+        print(f"Point cloud file not found: {point_cloud_path}")
+        raise HTTPException(status_code=404, detail="Point cloud file not found.")
+
+
 @app.get("/favicon.ico", include_in_schema=False)
 async def favicon():
     """Serves the favicon."""
