@@ -2,10 +2,11 @@
 
 import time
 import os
-from fastapi import FastAPI, Request, HTTPException, Depends
+from fastapi import FastAPI, Request, HTTPException, Depends, Response
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 import uvicorn
+import json
 
 # Assuming frame_search.py is in the same directory or accessible in PYTHONPATH
 from frame_search import FrameSearch
@@ -87,11 +88,14 @@ async def search_frames_api(
 
     # Use the search_frames method which returns [(frame_id, score), ...]
     results = frame_search.search_frames(term, show_top=50) # Get top 50 results
-    frame_ids = [frame_id for frame_id, score in results] # Extract just the IDs
+    
+    # Convert numpy.float32 scores to standard Python floats
+    serializable_results = [(frame_id, float(score)) for frame_id, score in results]
 
-    print(f"Search for '{term}' completed in {time.time() - start_time:.2f} seconds, found {len(frame_ids)} results.")
+    print(f"Search for '{term}' completed in {time.time() - start_time:.2f} seconds, found {len(serializable_results)} results.")
 
-    return JSONResponse(content={"frame_ids": frame_ids})
+    # Return the results with standard floats
+    return JSONResponse(content={"results": serializable_results})
 
 
 @app.get("/frame/{frame_id}")
@@ -125,6 +129,23 @@ async def serve_point_cloud():
     else:
         print(f"Point cloud file not found: {point_cloud_path}")
         raise HTTPException(status_code=404, detail="Point cloud file not found.")
+
+
+@app.get("/frame_poses")
+async def serve_frame_poses():
+    """Serves the frame poses JSON file."""
+    frame_poses_path = "data/frame_poses.json"
+    try:
+        if os.path.exists(frame_poses_path):
+            with open(frame_poses_path, 'r') as f:
+                data = json.load(f)
+            return JSONResponse(content=data)
+        else:
+            print(f"Frame poses file not found: {frame_poses_path}")
+            raise HTTPException(status_code=404, detail="Frame poses file not found.")
+    except Exception as e:
+        print(f"Error reading frame poses file {frame_poses_path}: {e}")
+        raise HTTPException(status_code=500, detail="Internal server error reading frame poses file.")
 
 
 @app.get("/favicon.ico", include_in_schema=False)
