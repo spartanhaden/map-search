@@ -2,6 +2,8 @@
 
 This project provides a web interface to search through video frames using natural language queries and visualizes the corresponding camera poses within a 3D point cloud reconstruction.
 
+![Map Search Application Screenshot](example.png)
+
 ## Features
 
 *   **Semantic Frame Search:** Enter text queries (e.g., "a person walking", "a red car") to find relevant video frames.
