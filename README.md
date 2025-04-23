@@ -2,7 +2,7 @@
 
 This project provides a web interface to search through video frames using natural language queries and visualizes the corresponding camera poses within a 3D point cloud reconstruction.
 
-![Map Search Application Screenshot](example.png)
+![Map Search Application Screenshot](static/assets/example.png)
 
 ## Features
 
